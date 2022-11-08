@@ -1,1 +1,1 @@
-# DSDM-ProjectRS
+# Argumentative Explanations for Group Recommender Systems
