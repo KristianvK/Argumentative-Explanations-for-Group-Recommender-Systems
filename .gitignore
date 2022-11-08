@@ -6,4 +6,5 @@ notebooks/.ipynb_checkpoints
 *.png
 *.zip
 venv/
+env/
 .env
