@@ -8,3 +8,4 @@ notebooks/.ipynb_checkpoints
 venv/
 env/
 .env
+.DS_Store
