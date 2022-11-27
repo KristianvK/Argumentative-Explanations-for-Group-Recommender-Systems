@@ -62,7 +62,8 @@ def generate_rating(user, list_aspects, rate="high"):
 
 
 list_asp = [db, aa, bh]
-generate_rating('Alice', all_aspects, rate='mix')
+generate_rating('Alice', all_aspects, rate='low')
+best_aspects = cmic.get_best_aspects(n=10)
 
 
 # Define a function to plot word cloud
@@ -73,7 +74,7 @@ def plot_cloud(wordcloud, item=''):
     plt.imshow(wordcloud)
     # No axis details
     plt.axis("off")
-    plt.title(item, fontsize=40)
+    plt.title(item, fontsize=40, style='italic')
 
     plt.show()
 
@@ -101,7 +102,7 @@ def color_function(word, **kwargs):
 
 d = dict(zip(cmic.get_connected_aspects_name(),
          cmic.get_connected_aspects_rating(user='Alice')))
-print(d)
+d = best_aspects
 # # Generate wordcloud
 wordcloud = WordCloud(width=3000, height=2000, random_state=1,
                       background_color='white',
