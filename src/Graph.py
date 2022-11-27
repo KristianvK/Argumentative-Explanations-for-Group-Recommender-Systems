@@ -31,29 +31,12 @@ all_aspects = [ldc, th, ss, b, d, cw, jg, ms, ep, nb, eb, jf, se, ce, sed, rcb,
                db, aa, bh]
 
 
-cmic = Item('f1', all_aspects)   # Catch me if you can
+cmic = Item('Catch me if you can', all_aspects)
 
 # # add users rating to item
 cmic.add_user('Bob', 4, 4.5, 4)
 cmic.add_user('Alice', 4.5, 4.5, 4.5)
 cmic.add_user('John', 4, 4, 4)
-
-# # add users rating to all aspects
-# ldc.add_user('Bob', 4.2, 4.5, 4.2)
-# ldc.add_user('Alice', 4.1, 4.5, 0.5)
-# ldc.add_user('John', 3.9, 4, 3.9)
-# th.add_user('Bob', 4.2, 4.5, 4.2)
-# th.add_user('Alice', 4.5, 4.5, 4.5)
-# th.add_user('John', 4, 4, 4)
-# ss.add_user('Bob', 4, 4.5, 4)
-# ss.add_user('Alice', 4.7, 4.5, 4.7)
-# ss.add_user('John', 4.2, 4, 4.2)
-# b.add_user('Bob', 4, 4.5, 4)
-# b.add_user('Alice', 4.5, 4.5, 4.5)
-# b.add_user('John', 4.3, 4, 4.3)
-# d.add_user('Bob', 4, 4.5, 4)
-# d.add_user('Alice', 2.5, 4.5, 2.5)
-# d.add_user('John', 4, 4, 4)
 
 
 def generate_rating(user, list_aspects, rate="high"):
@@ -83,13 +66,14 @@ generate_rating('Alice', all_aspects, rate='mix')
 
 
 # Define a function to plot word cloud
-def plot_cloud(wordcloud):
+def plot_cloud(wordcloud, item=''):
     # Set figure size
     plt.figure(figsize=(15, 10))
     # Display image
     plt.imshow(wordcloud)
     # No axis details
     plt.axis("off")
+    plt.title(item, fontsize=40)
 
     plt.show()
 
@@ -126,4 +110,4 @@ wordcloud = WordCloud(width=3000, height=2000, random_state=1,
                       collocations=False,
                       # mask=mask,
                       relative_scaling=0.5).generate_from_frequencies(d)
-plot_cloud(wordcloud)
+plot_cloud(wordcloud, cmic.name)
