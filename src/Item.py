@@ -27,7 +27,8 @@ class Item:
         aspect_avg = {}
         best_aspects = {}
         for aspect in self.connectedAspects:
-            avg_rating = statistics.mean(list(aspect.predicted_rating.values()))
+            avg_rating = statistics.mean(list(
+                                         aspect.predicted_rating.values()))
             name = aspect.name
             aspect_avg[name] = avg_rating
         assert n <= len(aspect_avg)
