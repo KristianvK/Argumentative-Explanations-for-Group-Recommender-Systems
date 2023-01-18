@@ -39,12 +39,20 @@ class Item:
         '''
         return [aspect.predicted_rating[user]
                 for aspect in self.connectedAspects]
-    
+
     def get_group_rating(self):
         return sum(self.predicted_rating.values()) / len(self.predicted_rating)
 
     def get_username(self):
         return self.rating_user.keys()
+
+    def get_best_k_users(self, k=2):
+        curr_rat = self.rating_user.copy()
+        user = []
+        for i in range(k):
+            user.append(max(curr_rat, key=curr_rat.get))
+            curr_rat.pop(max(curr_rat, key=curr_rat.get))
+        return user
 
     def get_best_aspects(self, n=5):
         '''
@@ -62,6 +70,24 @@ class Item:
         for i in range(n):
             asp = max(aspect_avg, key=aspect_avg.get)
             best_aspects[asp] = aspect_avg[asp]
-            print('best aspect:', asp)
             aspect_avg.pop(asp)
+        return best_aspects
+    
+    def get_best_aspects_user(self, user, n=5):
+        '''
+            returns the top n (predicted rating) aspects
+        '''
+        best_aspects = {}
+        max_rating = 0
+        name = ''
+        best_aspects = []
+        for i in range(n):
+            for aspect in self.connectedAspects:
+                if aspect.name not in best_aspects:
+                    if max_rating < aspect.predicted_rating[user]:
+                        max_rating = aspect.predicted_rating[user]
+                        name = aspect.name
+            best_aspects.append(name)
+            name = ''
+            max_rating = 0
         return best_aspects

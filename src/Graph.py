@@ -5,6 +5,7 @@ from wordcloud import WordCloud
 import numpy as np
 from random import random
 from PIL import Image
+from Linguistic import Linguistic
 
 ldc = Aspect('Leonardo di Caprio')
 th = Aspect('Tom Hanks')
@@ -99,4 +100,8 @@ wordcloud = WordCloud(width=3000, height=2000, random_state=1,
                       collocations=False,
                       # mask=mask,
                       relative_scaling=0.5).generate_from_frequencies(d)
-plot_cloud(wordcloud, cmic.name)
+# plot_cloud(wordcloud, cmic.name)
+
+linguistic = Linguistic(strategy='LM')
+explanation = linguistic.generate_user_explanation(cmic, 'Alice')
+print(explanation)
