@@ -80,18 +80,6 @@ def plot_cloud(wordcloud, item=''):
 
 
 mask = np.array(Image.open('image/upvote.png'))
-# aspects = ['Catch me if you can', 'Christopher Walken','Jennifer Garner',
-#            'Martin Sheen', 'Ellem Pompeo', 'Nathalie Baye',
-#               'Elizabeth Banks',
-#            'John Finn', 'Steve Eastin','Chris Ellis', 'Shane Edelman',
-#            'Robert Curtis Brown', 'Deborah Kellner', 'Amy Acker',
-#               'Brian Howe',
-#            'Benita Krista Nall', 'Alexander Bisping', 'Guy Daniel Tremblay',
-#            'Thomas Crawford', 'Amy Adams','Kam Heskin', 'Celine du Tertre',
-#            'Jaime Ray Newman','Robert Symonds','Jean-Francois Blanchard',
-#            'Thomas Kopache', 'Jonny Danks','Ana Maria Quintana','Jan Munroe',
-#            'Leonardo di Caprio', 'Tom Hanks', 'Steven Spielberg',
-#           'biography', 'drama']
 
 
 def color_function(word, **kwargs):
