@@ -79,13 +79,31 @@ class Linguistic:
             else:
                 explanation = explanation + 'and ' + aspects + ' '
             i += 1
-        explanation = explanation + ', and since you particularly like '
-        asp = item.get_best_aspects_user(username, n=nbr_aspects)
-        i = 0
-        for aspects in asp:
-            if i == 0:
-                explanation = explanation + aspects + ' '
-            else:
-                explanation = explanation + 'and ' + aspects + ' '
-            i += 1
-        return explanation
+        if item.predicted_rating[username] >= 4:
+            explanation = explanation + ', and since you particularly like '
+            asp = item.get_best_aspects_user(username, n=nbr_aspects)
+            i = 0
+            for aspects in asp:
+                if i == 0:
+                    explanation = explanation + aspects + ' '
+                else:
+                    explanation = explanation + 'and ' + aspects + ' '
+                i += 1
+            return explanation
+        elif item.predicted_rating[username] >= 2.5:
+            explanation = explanation + ', even though you feel neutral about '
+            asp = item.get_best_aspects_user(username, n=nbr_aspects)
+            i = 0
+            for aspects in asp:
+                if i == 0:
+                    explanation = explanation + aspects + ' '
+                else:
+                    explanation = explanation + 'and ' + aspects + ' '
+                i += 1
+            return explanation
+        else:
+            pred_rating_user = round(item.predicted_rating[username], 2)
+            explanation = (explanation +
+                           ', despite a predicted rating of ' +
+                           str(pred_rating_user) + ' for you.')
+            return explanation

@@ -91,3 +91,11 @@ class Item:
             name = ''
             max_rating = 0
         return best_aspects
+
+    def update_rating_item(self):
+        '''
+            update the predicted rating of the item
+        '''
+        for user in self.rating_user.keys():
+            rat_user = self.get_connected_aspects_rating(user)
+            self.predicted_rating[user] = sum(rat_user) / len(rat_user)

@@ -66,6 +66,7 @@ generate_rating('Bob', all_aspects, rate='neutral')
 generate_rating('Alice', all_aspects, rate='low')
 generate_rating('John', all_aspects, rate='high')
 best_aspects = cmic.get_best_aspects(n=10)
+cmic.update_rating_item()
 
 for user in all_user:
     print(user)
