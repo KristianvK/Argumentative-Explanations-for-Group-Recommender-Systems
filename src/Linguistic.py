@@ -59,7 +59,7 @@ class Linguistic:
             return str(item.name + 'is recommended because it leads to most ' +
                        ' pleasure within the group')
 
-    def generate_user_explanation(self, item, username, nbr_aspects=2):
+    def get_user_explanation(self, item, username, nbr_aspects=2):
         '''
             Generate explanation given the group strategy for one given user
             nbr_aspects: number of aspects to include in the explanation.
@@ -67,26 +67,25 @@ class Linguistic:
             username: username of the user to which we want to generate the
                 explanation
         '''
-        if self.strategy == 'LM':
-            explanation = str(item.name + ' is most similar to the ratings' +
-                              ' of users of the group. Furthermore, the' +
-                              ' movie is recommended since the group as a' +
-                              ' whole is interested in ')
-            asp = list(item.get_best_aspects(n=nbr_aspects).keys())
-            i = 0
-            for aspects in asp:
-                if i == 0:
-                    explanation = explanation + aspects + ' '
-                else:
-                    explanation = explanation + 'and ' + aspects + ' '
-                i += 1
-            explanation = explanation + ', and since you particularly like '
-            asp = item.get_best_aspects_user(username, n=nbr_aspects)
-            i = 0
-            for aspects in asp:
-                if i == 0:
-                    explanation = explanation + aspects + ' '
-                else:
-                    explanation = explanation + 'and ' + aspects + ' '
-                i += 1
-            return explanation
+        explanation = str(item.name + ' is most similar to the ratings' +
+                            ' of users of the group. Furthermore, the' +
+                            ' movie is recommended since the group as a' +
+                            ' whole is interested in ')
+        asp = list(item.get_best_aspects(n=nbr_aspects).keys())
+        i = 0
+        for aspects in asp:
+            if i == 0:
+                explanation = explanation + aspects + ' '
+            else:
+                explanation = explanation + 'and ' + aspects + ' '
+            i += 1
+        explanation = explanation + ', and since you particularly like '
+        asp = item.get_best_aspects_user(username, n=nbr_aspects)
+        i = 0
+        for aspects in asp:
+            if i == 0:
+                explanation = explanation + aspects + ' '
+            else:
+                explanation = explanation + 'and ' + aspects + ' '
+            i += 1
+        return explanation
