@@ -26,8 +26,6 @@ rcb = Aspect('Robert Curtis Brown')
 db = Aspect('Deborah Kellner')
 aa = Aspect('Amy Acker')
 bh = Aspect('Brian Howe')
-# 'Benita Krista Nall', 'Alexander Bisping', 'Guy Daniel Tremblay',
-# 'Thomas Crawford', 'Amy Adams','Kam Heskin', 'Celine du Tertre'
 all_aspects = [ldc, th, ss, b, d, cw, jg, ms, ep, nb, eb, jf, se, ce, sed, rcb,
                db, aa, bh]
 
@@ -38,6 +36,7 @@ cmic = Item('Catch me if you can', all_aspects)
 cmic.add_user('Bob', 4, 4.5, 4)
 cmic.add_user('Alice', 4.5, 4.5, 4.5)
 cmic.add_user('John', 4, 4, 4)
+all_user = ['Bob', 'Alice', 'John']
 
 
 def generate_rating(user, list_aspects, rate="high"):
@@ -63,17 +62,21 @@ def generate_rating(user, list_aspects, rate="high"):
 
 
 list_asp = [db, aa, bh]
+generate_rating('Bob', all_aspects, rate='neutral')
 generate_rating('Alice', all_aspects, rate='low')
+generate_rating('John', all_aspects, rate='high')
 best_aspects = cmic.get_best_aspects(n=10)
+
+for user in all_user:
+    print(user)
+    for aspect in all_aspects:
+        print('-----', aspect.name, round(aspect.rating_user[user], 2))
 
 
 # Define a function to plot word cloud
 def plot_cloud(wordcloud, item=''):
-    # Set figure size
     plt.figure(figsize=(15, 10))
-    # Display image
     plt.imshow(wordcloud)
-    # No axis details
     plt.axis("off")
     plt.title(item, fontsize=40, style='italic')
 
@@ -102,6 +105,15 @@ wordcloud = WordCloud(width=3000, height=2000, random_state=1,
                       relative_scaling=0.5).generate_from_frequencies(d)
 # plot_cloud(wordcloud, cmic.name)
 
+
+print()
 linguistic = Linguistic(strategy='LM')
-explanation = linguistic.generate_user_explanation(cmic, 'Alice')
+print('STRATEGY:', linguistic.strategy, '\n')
+user_exp = 'Alice'
+explanation = linguistic.get_user_explanation(cmic, user_exp)
+print('explanation user Alice:', explanation, '\n')
+explanation = linguistic.get_explanation_group_no_privacy(cmic)
+print('explanation group with no privacy:', explanation, '\n')
+explanation = linguistic.get_explanation_group_with_privacy(cmic)
+print('explanation group with privacy:', explanation, '\n')
 print(explanation)
