@@ -7,12 +7,12 @@ class Item:
         '''
             name: name of the item
             connected aspects: all aspects sharing a link with this aspect
-            rating_user: rating of the user if already known, 
+            rating_user: rating of the user if already known,
                         otherwise need to impute it based on Rago's paper
-            rating_similar_user: rating of the similar users (collaborative 
+            rating_similar_user: rating of the similar users (collaborative
                         filtering) (dict hence per user)
-            predicted rating: based on the formula of rago's paper (approx. 
-                        mean of rating user and rating_similar_user) (dict 
+            predicted rating: based on the formula of rago's paper (approx.
+                        mean of rating user and rating_similar_user) (dict
                         hence per user)
         '''
         self.name = name

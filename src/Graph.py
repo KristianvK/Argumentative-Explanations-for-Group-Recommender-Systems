@@ -62,8 +62,8 @@ def generate_rating(user, list_aspects, rate="high"):
 
 
 list_asp = [db, aa, bh]
-generate_rating('Bob', all_aspects, rate='neutral')
-generate_rating('Alice', all_aspects, rate='low')
+generate_rating('Bob', all_aspects, rate='high')
+generate_rating('Alice', all_aspects, rate='high')
 generate_rating('John', all_aspects, rate='high')
 best_aspects = cmic.get_best_aspects(n=10)
 cmic.update_rating_item()
@@ -108,13 +108,22 @@ wordcloud = WordCloud(width=3000, height=2000, random_state=1,
 
 
 print()
-linguistic = Linguistic(strategy='LM')
+linguistic = Linguistic(strategy='AVG')
 print('STRATEGY:', linguistic.strategy, '\n')
-user_exp = 'Alice'
-explanation = linguistic.get_user_explanation(cmic, user_exp)
-print('explanation user Alice:', explanation, '\n')
+
 explanation = linguistic.get_explanation_group_no_privacy(cmic)
 print('explanation group with no privacy:', explanation, '\n')
 explanation = linguistic.get_explanation_group_with_privacy(cmic)
 print('explanation group with privacy:', explanation, '\n')
-print(explanation)
+
+user_exp = 'Alice'
+explanation = linguistic.get_user_explanation(cmic, user_exp)
+print('explanation user Alice:', explanation, '\n')
+
+user_exp = 'Bob'
+explanation = linguistic.get_user_explanation(cmic, user_exp)
+print('explanation user Bob:', explanation, '\n')
+
+user_exp = 'John'
+explanation = linguistic.get_user_explanation(cmic, user_exp)
+print('explanation user John:', explanation, '\n')
